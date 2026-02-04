@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookbook Curator PRO — Preserve the recipes worth keeping</title>
+  <meta name="description" content="Scan cookbook pages with your iPhone camera. AI extracts recipes instantly. Organize, search, and share your recipe collection.">
+  <meta property="og:title" content="Cookbook Curator PRO">
+  <meta property="og:description" content="Preserve the recipes worth keeping. AI-powered cookbook scanning for iPhone.">
+  <meta property="og:image" content="assets/images/screenshot-1.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/images/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --off-white: #FAF8F3;
+      --cream: #F5F1E8;
+      --light-brown: #C8B299;
+      --warm-gray: #8B8178;
+      --dark-brown: #5C4D3C;
+      --golden-tan: #D4A574;
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--dark-brown);
+      background: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ========================================
+       NAV
+    ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(250, 248, 243, 0.92);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(200, 178, 153, 0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+    }
+
+    .nav-brand span {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--dark-brown);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-download {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      transition: color 0.3s;
+    }
+
+    .nav-download:hover {
+      color: var(--dark-brown);
+    }
+
+    /* ========================================
+       SECTION 1 — HERO
+    ======================================== */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      background: var(--off-white);
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .hero-rule {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--light-brown);
+      margin: 0 auto 32px;
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7vw, 64px);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--dark-brown);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--golden-tan);
+    }
+
+    .hero-tagline {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--warm-gray);
+      margin-bottom: 36px;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-appstore {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--dark-brown);
+      color: var(--off-white);
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-appstore:hover {
+      background: #4a3e30;
+      transform: translateY(-1px);
+    }
+
+    .btn-appstore svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .phone-frame {
+      width: 260px;
+      max-width: 70vw;
+      position: relative;
+      background: #1a1a1a;
+      border-radius: 44px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #2a2a2a,
+        0 0 0 4px #1a1a1a,
+        0 20px 60px rgba(92, 77, 60, 0.25),
+        0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .phone-frame::before {
+      /* Dynamic Island */
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .phone-frame img {
+      width: 100%;
+      display: block;
+      border-radius: 32px;
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.35;
+    }
+
+    .scroll-hint span {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .scroll-hint svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--warm-gray);
+      animation: nudge 2.5s ease-in-out infinite;
+    }
+
+    @keyframes nudge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    /* ========================================
+       SECTION 2 — FEATURES + SCREENSHOTS
+    ======================================== */
+    .features {
+      background: var(--cream);
+      padding: 80px 0 72px;
+      position: relative;
+    }
+
+    .features-heading {
+      text-align: center;
+      margin-bottom: 44px;
+      padding: 0 24px;
+    }
+
+    .features-heading h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 4.5vw, 40px);
+      font-weight: 400;
+      color: var(--dark-brown);
+      margin-bottom: 12px;
+    }
+
+    .features-heading p {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+
+    /* Screenshot strip */
+    .screenshot-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 24px 4px;
+      scrollbar-width: none;
+    }
+
+    .screenshot-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screenshot-strip img {
+      flex: 0 0 auto;
+      width: 220px;
+      scroll-snap-align: center;
+    }
+
+    /* Center on desktop when all fit */
+    @media (min-width: 1024px) {
+      .screenshot-strip {
+        justify-content: center;
+        overflow-x: visible;
+        gap: 20px;
+        padding: 0 40px 4px;
+      }
+
+      .screenshot-strip img {
+        width: 240px;
+      }
+    }
+
+    /* Video area with annotations */
+    .video-area {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-showcase {
+      position: relative;
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 620px;
+    }
+
+    /* iPhone 16 frame — titanium style */
+    .video-phone-frame {
+      position: relative;
+      width: 260px;
+      flex-shrink: 0;
+      background: #111;
+      border-radius: 48px;
+      padding: 8px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 0 0 1.5px #333,
+        0 0 0 3px #111,
+        0 30px 80px rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Screen area */
+    .video-phone-screen {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 393 / 852;
+      border-radius: 42px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Dynamic Island */
+    .video-phone-screen::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 3;
+    }
+
+    .video-phone-screen video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Side button accents */
+    .video-phone-frame::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 140px;
+      width: 3px;
+      height: 56px;
+      background: #333;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .video-caption {
+      margin-top: 24px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--warm-gray);
+      text-align: center;
+    }
+
+    /* Handwritten annotations */
+    .annotation {
+      position: absolute;
+      font-family: 'Caveat', cursive;
+      color: var(--dark-brown);
+      line-height: 1.15;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .annotation-tl {
+      top: 10px;
+      left: 0;
+      font-size: 30px;
+      transform: rotate(-6deg);
+    }
+
+    .annotation-tr {
+      top: 20px;
+      right: 0;
+      font-size: 28px;
+      text-align: right;
+      transform: rotate(4deg);
+    }
+
+    .annotation-bl {
+      bottom: 50px;
+      left: 0;
+      font-size: 30px;
+      transform: rotate(-4deg);
+    }
+
+    .annotation-br {
+      bottom: 40px;
+      right: 0;
+      font-size: 28px;
+      text-align: right;
+      transform: rotate(5deg);
+    }
+
+    /* Annotation arrows */
+    .annotation svg {
+      display: block;
+      stroke: var(--dark-brown);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.55;
+    }
+
+    .annotation-tl svg {
+      width: 80px;
+      height: 50px;
+      margin-top: 6px;
+      margin-left: auto;
+    }
+
+    .annotation-tr svg {
+      width: 80px;
+      height: 50px;
+      margin-top: 6px;
+      margin-right: auto;
+    }
+
+    .annotation-bl svg {
+      width: 80px;
+      height: 50px;
+      margin-bottom: 6px;
+      margin-left: auto;
+    }
+
+    .annotation-br svg {
+      width: 80px;
+      height: 50px;
+      margin-bottom: 6px;
+      margin-right: auto;
+    }
+
+    /* Hide annotations on small screens where they'd overlap the phone */
+    @media (max-width: 700px) {
+      .annotation {
+        display: none;
+      }
+      .video-showcase {
+        min-height: auto;
+      }
+    }
+
+    /* Features grid */
+    .features-grid {
+      max-width: 700px;
+      margin: 56px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px 40px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .feature-item svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      stroke: var(--golden-tan);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      margin-top: 2px;
+    }
+
+    .feature-item h3 {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--dark-brown);
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--warm-gray);
+    }
+
+    @media (min-width: 600px) {
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ========================================
+       SECTION 3 — CTA + FOOTER
+    ======================================== */
+    .cta-footer {
+      background: var(--dark-brown);
+      padding: 80px 24px 0;
+      text-align: center;
+    }
+
+    .cta-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      margin: 0 auto 24px;
+    }
+
+    .cta-footer h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 400;
+      color: var(--off-white);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .cta-subtitle {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      color: var(--light-brown);
+      margin-bottom: 32px;
+    }
+
+    .btn-appstore-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--off-white);
+      color: var(--dark-brown);
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-appstore-light:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-appstore-light svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .footer-bar {
+      margin-top: 72px;
+      border-top: 1px solid rgba(200, 178, 153, 0.18);
+      padding: 24px 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+    }
+
+    .footer-bar span,
+    .footer-bar a {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: rgba(200, 178, 153, 0.55);
+      letter-spacing: 0.02em;
+    }
+
+    .footer-bar a {
+      color: var(--light-brown);
+      transition: color 0.3s;
+    }
+
+    .footer-bar a:hover {
+      color: var(--off-white);
+    }
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+                  transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .scroll-hint svg {
+        animation: none;
+      }
+    }
+
+    /* ========================================
+       RESPONSIVE TWEAKS
+    ======================================== */
+    @media (min-width: 768px) {
+      .hero h1 {
+        font-size: clamp(44px, 5.5vw, 64px);
+      }
+
+      .phone-frame {
+        width: 300px;
+      }
+
+      .features {
+        padding: 100px 0 88px;
+      }
+
+      .cta-footer {
+        padding: 100px 24px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 16px 20px;
+      }
+
+      .nav-brand span {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 90px 20px 50px;
+      }
+
+      .phone-frame {
+        width: 230px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-brand">
+      <img src="assets/images/app-icon.png" alt="Cookbook Curator" width="32" height="32">
+      <span>Cookbook Curator</span>
+    </a>
+    <a href="#download" class="nav-download">Download</a>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-rule reveal"></span>
+      <h1 class="reveal reveal-d1">Preserve the recipes<br><em>worth keeping.</em></h1>
+      <p class="hero-tagline reveal reveal-d2">Scan your cookbooks. AI extracts every recipe.<br>Build your digital library.</p>
+      <a href="#" class="btn-appstore reveal reveal-d3">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+    </div>
+    <div class="phone-frame reveal reveal-d4">
+      <img src="assets/images/in-app-3.png" alt="Recipe library showing Jalapeño Popper Eggs, Green Chilli Vinaigrette, and more" loading="eager">
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- Section 2: Video + Features -->
+  <section class="features">
+    <div class="video-area reveal">
+      <div class="video-showcase">
+        <span class="annotation annotation-tl">
+          scan your<br>cookbooks
+          <svg viewBox="0 0 80 50"><path d="M10 8 C25 10, 50 12, 68 38"/><path d="M68 38 L62 30"/><path d="M68 38 L58 37"/></svg>
+        </span>
+        <span class="annotation annotation-tr">
+          your favourite<br>recipes on<br>your phone
+          <svg viewBox="0 0 80 50"><path d="M70 8 C55 10, 30 12, 12 38"/><path d="M12 38 L18 30"/><path d="M12 38 L22 37"/></svg>
+        </span>
+        <div class="video-phone-frame">
+          <div class="video-phone-screen">
+            <video controls playsinline preload="metadata">
+              <source src="assets/video/demo_compressed.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <span class="annotation annotation-bl">
+          <svg viewBox="0 0 80 50"><path d="M10 42 C25 40, 50 38, 68 12"/><path d="M68 12 L62 20"/><path d="M68 12 L58 13"/></svg>
+          share with<br>family
+        </span>
+        <span class="annotation annotation-br">
+          <svg viewBox="0 0 80 50"><path d="M70 42 C55 40, 30 38, 12 12"/><path d="M12 12 L18 20"/><path d="M12 12 L22 13"/></svg>
+          make your<br>cookbooks<br>searchable
+        </span>
+      </div>
+      <p class="video-caption">See it in action</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 2L9 8.5 2 9.5l5 5-1 7 6-3.5 6 3.5-1-7 5-5-7-1z"/></svg>
+        <div>
+          <h3>AI-Powered Scanning</h3>
+          <p>Photograph a recipe page and AI extracts the title, ingredients, and steps automatically.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-d1">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <div>
+          <h3>Cookbook Organization</h3>
+          <p>Group recipes by cookbook with titles, page numbers, and personal notes.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-d1">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <h3>Search &amp; Filter</h3>
+          <p>Find any recipe instantly with full-text search, tags, and favorites.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-d2">
+        <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        <div>
+          <h3>iCloud Sync</h3>
+          <p>Your collection syncs seamlessly across all your Apple devices.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-d2">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div>
+          <h3>PDF Export</h3>
+          <p>Generate clean, printable PDFs of any recipe to share or keep offline.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-d3">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <div>
+          <h3>Easy Sharing</h3>
+          <p>Share via Messages, AirDrop, Notes, or any app on your phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: CTA + Footer -->
+  <section class="cta-footer" id="download">
+    <div class="reveal">
+      <img src="assets/images/app-icon.png" alt="Cookbook Curator PRO" class="cta-icon" width="64" height="64">
+      <h2>Start your recipe<br>library today.</h2>
+      <p class="cta-subtitle">Free on the App Store.</p>
+      <a href="#" class="btn-appstore-light">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+    </div>
+    <footer class="footer-bar">
+      <span>&copy; 2026 Cookbook Curator</span>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="faq.html">Help & FAQ</a>
+      <a href="credits.html">Credits</a>
+      <a href="mailto:feedback@cookbookcuratorpro.com">Contact</a>
+    </footer>
+  </section>
+
+  <script>
+    // Nav background on scroll
+    const nav = document.getElementById('nav');
+    addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', scrollY > 10);
+    }, { passive: true });
+
+    // Reveal on scroll
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+  </script>
+
+</body>
+</html>
