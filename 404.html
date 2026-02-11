@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookbook Curator PRO</title>
+  <meta property="og:title" content="Someone shared a cookbook with you">
+  <meta property="og:description" content="Open this cookbook in Cookbook Curator PRO to view and import the recipes.">
+  <meta property="og:image" content="/assets/images/app-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --off-white: #FAF8F3;
+      --cream: #F5F1E8;
+      --light-brown: #C8B299;
+      --warm-gray: #8B8178;
+      --dark-brown: #5C4D3C;
+      --golden-tan: #D4A574;
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--dark-brown);
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      max-width: 420px;
+      margin: 40px 20px;
+      padding: 48px 32px;
+      text-align: center;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 20px rgba(92, 77, 60, 0.08);
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      margin: 0 auto 24px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--dark-brown);
+    }
+    .subtitle {
+      font-size: 16px;
+      color: var(--warm-gray);
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .open-btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--dark-brown);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+    .open-btn:hover { background: #4a3e30; }
+    .fallback {
+      font-size: 14px;
+      color: var(--light-brown);
+      line-height: 1.5;
+    }
+    .fallback a {
+      color: var(--golden-tan);
+      text-decoration: underline;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Share page (shown for /share/* URLs) -->
+  <div class="card" id="share-page">
+    <img class="icon" src="/assets/images/app-icon.png" alt="Cookbook Curator PRO">
+    <h1>A cookbook was shared with you</h1>
+    <p class="subtitle">Open this link on your iPhone to import the cookbook directly into Cookbook Curator PRO.</p>
+    <a class="open-btn" id="openApp" href="#">Open in App</a>
+    <p class="fallback">
+      Don't have the app?<br>
+      <a href="https://apps.apple.com/app/id6757857635">Download Cookbook Curator PRO</a>
+    </p>
+  </div>
+
+  <!-- 404 page (shown for all other missing URLs) -->
+  <div class="card hidden" id="not-found-page">
+    <img class="icon" src="/assets/images/app-icon.png" alt="Cookbook Curator PRO">
+    <h1>Page not found</h1>
+    <p class="subtitle">The page you're looking for doesn't exist.</p>
+    <a class="open-btn" href="/">Go to Homepage</a>
+  </div>
+
+  <script>
+    var path = window.location.pathname;
+    var sharePage = document.getElementById('share-page');
+    var notFoundPage = document.getElementById('not-found-page');
+
+    if (path.startsWith('/share/')) {
+      // Show share page and set up the app deep link
+      sharePage.classList.remove('hidden');
+      notFoundPage.classList.add('hidden');
+      var shareId = path.replace('/share/', '');
+      document.getElementById('openApp').href = 'cookbookcurator://share/' + shareId;
+    } else {
+      // Show 404 page
+      sharePage.classList.add('hidden');
+      notFoundPage.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

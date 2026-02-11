@@ -1,0 +1,22 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "X2CG6Z2K48.com.cookbookcurator.Cookbook-Curator-PRO"
+        ],
+        "components": [
+          {
+            "/": "/share/*",
+            "comment": "Match cookbook share links"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "X2CG6Z2K48.com.cookbookcurator.Cookbook-Curator-PRO"
+    ]
+  }
+}
