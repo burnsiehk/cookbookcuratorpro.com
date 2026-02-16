@@ -4,10 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help & FAQ — Cookbook Curator PRO</title>
+  <meta name="description" content="Get help with Cookbook Curator PRO. Learn how to scan recipes, organize cookbooks, sync with iCloud, manage your subscription, and more.">
   <link rel="icon" type="image/png" href="assets/images/app-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <!-- FAQ Structured Data for Google Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I digitize a cookbook recipe with my phone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tap the + button, choose AI Scan or Step By Step, photograph the cookbook page, and the app extracts the recipe title, ingredients, and instructions automatically. Review, edit if needed, and save."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many free scans do I get?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Free users get 5 AI scans per month, resetting on the 1st. You can earn up to 4 bonus scans by leaving an App Store review (+2) or sharing the app (+2). Manual recipe entry is always unlimited."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a Cookbook Curator PRO subscription include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pro gives you 200 AI scans per month (enough to digitize an entire cookbook in one sitting), iCloud sync across all your Apple devices, and the ability to export and share your recipes as PDFs, recipe cards, or backup files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I scan handwritten recipes or recipe cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Cookbook Curator PRO works with printed cookbook pages, recipe cards, magazine clippings, and handwritten recipes. The AI works best with clearly printed text; handwritten recipes may have lower accuracy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I scan a recipe that spans multiple pages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Step By Step mode. It lets you photograph each page separately and combine them into one complete recipe. At each step (Description, Ingredients, Steps), tap Scan Text to photograph the relevant page. If a section spans two pages, scan the first page then type or paste the rest into the editable text field."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do my recipes sync across devices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. With iCloud enabled, your recipes sync automatically across all Apple devices signed in with the same Apple ID. Make sure iCloud is enabled in the app under Settings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my recipe data private and secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your recipes are stored locally on your device and in your private iCloud container. Photos sent for AI scanning are processed in real time and never stored on our servers."
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
     :root {
       --off-white: #FAF8F3;
@@ -60,6 +128,12 @@
       color: var(--warm-gray);
       margin-bottom: 40px;
     }
+    .intro a {
+      color: var(--golden-tan);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .intro a:hover { color: var(--dark-brown); }
     h2 {
       font-family: var(--font-serif);
       font-size: 24px;
@@ -113,12 +187,47 @@
       color: var(--warm-gray);
       margin-top: 12px;
     }
+    .cta-box {
+      text-align: center;
+      border: 1px solid var(--light-brown);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin: 32px 0;
+    }
+    .cta-box h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--dark-brown);
+      margin-bottom: 8px;
+    }
+    .cta-box p {
+      font-size: 15px;
+      color: var(--warm-gray);
+      margin-bottom: 16px;
+    }
+    .cta-box a.store-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--dark-brown);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-box a.store-btn:hover { background: #4a3d2e; }
     .contact {
       margin-top: 48px;
       padding-top: 24px;
       border-top: 1px solid var(--light-brown);
       font-size: 14px;
       color: var(--warm-gray);
+    }
+    .contact h2 {
+      font-size: 22px;
+      margin-top: 0;
     }
     .contact a {
       color: var(--golden-tan);
@@ -127,6 +236,13 @@
     }
     .contact a:hover {
       color: var(--dark-brown);
+    }
+    .contact .footer-links {
+      margin-top: 12px;
+    }
+    .contact .footer-links a {
+      color: var(--warm-gray);
+      margin-right: 16px;
     }
   </style>
 </head>
@@ -138,7 +254,7 @@
     </a>
 
     <h1>Help & FAQ</h1>
-    <p class="intro">Everything you need to know about using Cookbook Curator PRO.</p>
+    <p class="intro">Quick answers about scanning, organizing, and sharing your recipes. Can't find what you need? <a href="mailto:feedback@cookbookcuratorpro.com">Email us</a> — we typically reply within a few hours.</p>
 
     <!-- Demo Video -->
     <div class="video-section">
@@ -146,49 +262,83 @@
         <source src="assets/video/demo_compressed.mp4" type="video/mp4">
         Your browser does not support the video element.
       </video>
-      <p class="video-caption">See Cookbook Curator PRO in action</p>
+      <p class="video-caption">A quick tour: scan a recipe, organize it, and share it (1 min)</p>
     </div>
 
-    <h2>Scanning Recipes</h2>
+    <!-- ===================== GETTING STARTED ===================== -->
+    <h2>Getting Started</h2>
 
     <div class="faq-item">
-      <h3>How do I scan a recipe?</h3>
+      <h3>How do I digitize a cookbook recipe with my phone?</h3>
       <ol>
         <li>Tap the <strong>+</strong> button on the main screen</li>
-        <li>Choose <strong>Scan Recipe</strong> to photograph a cookbook page</li>
-        <li>Position the page in the camera viewfinder and take the photo</li>
-        <li>AI will automatically extract the recipe title, ingredients, and instructions</li>
+        <li>Choose <strong>AI Scan</strong> (one photo, AI extracts everything) or <strong>Step By Step</strong> (scan each section separately)</li>
+        <li>Photograph the cookbook page</li>
         <li>Review the extracted recipe, make any edits, and save</li>
       </ol>
     </div>
 
     <div class="faq-item">
-      <h3>What kind of recipes can I scan?</h3>
-      <p>Cookbook Curator PRO works with printed cookbook pages, recipe cards, and magazine clippings. The AI works best with clearly printed text. Handwritten recipes may have lower accuracy.</p>
+      <h3>Can I add recipes manually without scanning?</h3>
+      <p>Yes. Tap <strong>+</strong>, choose <strong>Step By Step</strong>, and type directly into each field — title, description, ingredients, and steps. Manual entry is always free and unlimited.</p>
+    </div>
+
+    <!-- ================= SUBSCRIPTIONS & FREE SCANS ================= -->
+    <h2>Subscriptions & Free Scans</h2>
+
+    <div class="faq-item">
+      <h3>How many free scans do I get?</h3>
+      <p>Free users get <strong>5 AI scans per month</strong>, resetting on the 1st. You can earn up to 4 bonus scans by leaving an App Store review (+2) or sharing the app with a friend (+2). Manual recipe entry is always unlimited.</p>
     </div>
 
     <div class="faq-item">
-      <h3>When should I use AI Scan vs Step By Step?</h3>
-      <p><strong>AI Scan</strong> is great for recipes that fit on a single page — just snap one photo and the AI extracts everything automatically.</p>
-      <p>For recipes that span multiple pages, <strong>Step By Step</strong> is the better choice. It lets you photograph each page separately and combines them into one complete recipe.</p>
+      <h3>What does a Pro subscription include?</h3>
+      <p>Pro unlocks the full experience:</p>
+      <ul>
+        <li><strong>200 AI scans per month</strong> — enough to digitize an entire cookbook in one sitting</li>
+        <li><strong>iCloud sync</strong> — access your recipes on every iPhone, iPad, and Mac signed into your Apple ID</li>
+        <li><strong>Export & share</strong> — send recipes as beautiful PDFs, share cookbooks with friends, or back up your full collection</li>
+      </ul>
+      <p>Available monthly or annually — the annual plan saves you over 30%. Both plans include a free trial so you can try everything before you're charged.</p>
     </div>
 
     <div class="faq-item">
-      <h3>How do I scan a recipe that spans 2 or more pages?</h3>
-      <p>Many cookbook recipes spill across multiple pages. Here's how to capture everything:</p>
-      <p><strong>Best approach: Use Step By Step mode</strong></p>
+      <h3>What happens when I run out of free scans?</h3>
+      <p>You'll be prompted to upgrade to Pro. You can also add recipes manually at any time, or wait until the 1st of the next month when your free scans reset.</p>
+    </div>
+
+    <!-- App Store CTA -->
+    <div class="cta-box">
+      <h3>Ready to start scanning?</h3>
+      <p>Try 5 free AI scans — no credit card required.</p>
+      <a href="https://apps.apple.com/app/cookbook-curator-pro/id6741090498" class="store-btn" target="_blank" rel="noopener">Download Free on the App Store</a>
+    </div>
+
+    <!-- ================= SCANNING RECIPES ================= -->
+    <h2>Scanning Recipes</h2>
+
+    <div class="faq-item">
+      <h3>What's the difference between AI Scan and Step By Step?</h3>
+      <p><strong>AI Scan</strong> is the fastest option — snap one photo and AI extracts the title, ingredients, and instructions automatically. Best for recipes that fit on a single page.</p>
+      <p><strong>Step By Step</strong> gives you more control. You scan each section separately (description, ingredients, steps) and can combine content from multiple pages. Best for longer recipes or when you want precision.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I scan handwritten recipes or recipe cards?</h3>
+      <p>Yes. Cookbook Curator PRO works with printed cookbook pages, recipe cards, magazine clippings, and handwritten recipes. The AI works best with clearly printed text — handwritten recipes may need a quick edit after scanning.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I scan a recipe that spans multiple pages?</h3>
+      <p>Use <strong>Step By Step</strong> mode. It lets you photograph each page separately and combine them into one complete recipe.</p>
       <ol>
         <li>Tap <strong>+</strong> and choose <strong>Step By Step</strong></li>
-        <li>Select or create your cookbook, then add the cookbook cover photo</li>
-        <li>Fill in the recipe name, page number, and any other details, then continue</li>
-        <li>Add a photo of the finished dish (optional)</li>
-        <li>At the <strong>Description</strong> step, tap <strong>Scan Text</strong> and photograph the page that contains the recipe description. After scanning, the text appears in an editable field — you can type in any additional description from other pages</li>
-        <li>At the <strong>Ingredients</strong> step, tap <strong>Scan Text</strong> and photograph the page with the ingredients list. If ingredients continue on a second page, simply scroll to the bottom of the text field and type or paste the remaining ingredients</li>
-        <li>At the <strong>Steps</strong> step, do the same — scan the first page of instructions, then add any remaining steps from additional pages by typing them into the text field</li>
+        <li>Enter the recipe name, page number, and select a cookbook</li>
+        <li>At each step (Description, Ingredients, Steps), tap <strong>Scan Text</strong> and photograph the relevant page</li>
+        <li>If a section spans two pages, scan the first page, then scroll to the bottom of the text field and type or paste the rest</li>
         <li>Review everything and save</li>
       </ol>
-      <p><strong>Tip:</strong> At each step, scan the page with the most content first. The text field is fully editable, so you can always add, rearrange, or correct text after scanning.</p>
-      <p><strong>Using AI Scan instead?</strong> Photograph the page that has the most recipe content. After the AI extracts the recipe, tap into any field on the review screen to add missing ingredients or steps from the other pages.</p>
+      <p><strong>Prefer the quick method?</strong> Use AI Scan on the page with the most content, then tap any field on the review screen to add what's missing.</p>
     </div>
 
     <!-- Step By Step Walkthrough Video -->
@@ -197,106 +347,99 @@
         <source src="assets/video/step_by_step_scanning.mp4" type="video/mp4">
         Your browser does not support the video element.
       </video>
-      <p class="video-caption">Walkthrough: scanning a multi-page recipe using Step By Step</p>
+      <p class="video-caption">Watch: scanning a multi-page recipe using Step By Step (2 min)</p>
     </div>
 
     <div class="faq-item">
-      <h3>Step By Step walkthrough</h3>
-      <p>The video above walks through scanning a recipe that spans multiple pages. Here's what's happening at each stage:</p>
-      <ol>
-        <li><strong>Choose Step By Step</strong> — Tap the <strong>+</strong> button and select <strong>Step By Step</strong> (instead of AI Scan)</li>
-        <li><strong>Enter recipe details</strong> — Type the recipe title, add the page number, and select which cookbook it belongs to</li>
-        <li><strong>Scan the description</strong> — Tap <strong>Scan Text</strong>, point your camera at the page, and tap the text blocks you want. Selected blocks turn <strong>green</strong> so you can see exactly what's been captured. Tap <strong>Done</strong> when finished</li>
-        <li><strong>Scan the ingredients</strong> — At the Ingredients step, tap <strong>Scan Text</strong> again and select the ingredient list from the page. The scanned text appears in an editable field so you can add any missing items</li>
-        <li><strong>Scan the steps</strong> — At the Steps screen, scan the cooking instructions. You can select multiple text blocks — each one highlights green as you tap it</li>
-        <li><strong>Review and save</strong> — Check the recipe photo, title, description, ingredients, and steps. Add any extra details like servings or total time, then tap <strong>Save Recipe</strong></li>
-      </ol>
-      <p><strong>Tip:</strong> If a section spans two pages, scan the first page, then scroll to the bottom of the text field and type or paste the remaining content from the second page.</p>
+      <h3>Why didn't my recipe scan correctly?</h3>
+      <p>A few things to check:</p>
+      <ul>
+        <li>Make sure the page is well-lit and the text is in focus</li>
+        <li>Hold the camera steady and avoid shadows across the text</li>
+        <li>For best results, photograph one page at a time</li>
+      </ul>
+      <p>You can always edit the extracted recipe after scanning — tap any field to make corrections.</p>
+    </div>
+
+    <!-- =============== ORGANIZING & FINDING RECIPES =============== -->
+    <h2>Organizing & Finding Recipes</h2>
+
+    <div class="faq-item">
+      <h3>How do I organize scanned recipes into collections?</h3>
+      <p>When you scan or add a recipe, you assign it to a cookbook. You can create as many cookbooks as you like from the main screen. Each recipe belongs to one cookbook and can include a page number for easy reference back to the original book.</p>
     </div>
 
     <div class="faq-item">
-      <h3>The scan didn't extract correctly. What should I do?</h3>
-      <p>Ensure the page is well-lit and the text is in focus. You can always edit the extracted recipe after scanning — tap any field to make corrections.</p>
-    </div>
-
-    <h2>Organizing Recipes</h2>
-
-    <div class="faq-item">
-      <h3>How do I organize recipes into cookbooks?</h3>
-      <p>When you scan or add a recipe, you can assign it to a cookbook. You can also create new cookbooks from the main screen. Each recipe belongs to one cookbook and can include a page number for easy reference back to the original book.</p>
+      <h3>Can I move a recipe to a different cookbook?</h3>
+      <p>Yes. Open the recipe, tap <strong>Edit</strong>, and change the cookbook field. The recipe will move to the new cookbook immediately.</p>
     </div>
 
     <div class="faq-item">
-      <h3>Can I search my recipes?</h3>
-      <p>Yes! Use the search bar at the top of the recipe list to search by recipe title, ingredients, or cookbook name. You can also filter recipes by tags and favorites.</p>
+      <h3>How do I search and filter my recipes?</h3>
+      <p>Use the search bar at the top of the recipe list to search by recipe title, ingredients, or cookbook name. You can also filter by tags and favorites to find exactly what you're looking for.</p>
     </div>
 
     <div class="faq-item">
-      <h3>How do I tag recipes?</h3>
-      <p>Open any recipe and tap <strong>Edit</strong>. You can add tags like "Dinner," "Quick," "Vegetarian," or any custom tag. Use tags to filter and find recipes quickly.</p>
+      <h3>How do tags work?</h3>
+      <p>Tags help you categorize recipes across cookbooks. Open any recipe, tap <strong>Edit</strong>, and add tags like "Dinner", "Quick", "Vegetarian", or any custom label. The app also suggests tags automatically based on your recipe content. Use the <strong>Tags</strong> tab on the main screen to browse by tag.</p>
     </div>
 
+    <!-- =============== SHARING & EXPORTING =============== -->
     <h2>Sharing & Exporting</h2>
 
     <div class="faq-item">
-      <h3>How do I share a recipe?</h3>
-      <p>Open the recipe and tap the <strong>share</strong> button in the top right. You can share as text, a recipe card image, or a PDF. The share sheet lets you send via Messages, Mail, AirDrop, or any other app.</p>
+      <h3>How do I share a recipe or cookbook?</h3>
+      <p><strong>Single recipe:</strong> Open the recipe and tap the share button in the top right. You can share as text, a recipe card image, or a PDF via Messages, Mail, AirDrop, or any other app.</p>
+      <p><strong>Entire cookbook:</strong> Go to the cookbook, tap share, and choose to send via AirDrop, email, or create a shareable link. Recipients with the app can import the full cookbook with one tap.</p>
     </div>
 
     <div class="faq-item">
-      <h3>How do I export all my recipes?</h3>
-      <p>Go to <strong>Settings → Export All Recipes</strong>. You can export your entire collection as a JSON file (for backup) or a PDF (for printing). The PDF includes a title page and all recipes formatted for US Letter paper.</p>
+      <h3>How do I export or back up all my recipes?</h3>
+      <p>Go to <strong>Settings &rarr; Export All Recipes</strong>. You can export as a JSON file (for backup) or a PDF (for printing). The PDF includes a title page and all recipes formatted for easy reading.</p>
     </div>
 
+    <!-- =============== ICLOUD SYNC =============== -->
     <h2>iCloud Sync</h2>
 
     <div class="faq-item">
       <h3>Do my recipes sync across devices?</h3>
-      <p>Yes, if iCloud is enabled. Your recipes sync automatically via iCloud across all your Apple devices signed in with the same Apple ID. Make sure iCloud is enabled in <strong>Settings → iCloud</strong> within the app.</p>
+      <p>Yes. With iCloud enabled, your recipes sync automatically across all Apple devices signed in with the same Apple ID. Make sure iCloud is enabled in <strong>Settings &rarr; iCloud</strong> within the app.</p>
     </div>
 
     <div class="faq-item">
       <h3>iCloud sync isn't working. What should I check?</h3>
       <ul>
-        <li>Ensure you're signed into iCloud on your device (iOS Settings → Apple ID → iCloud)</li>
-        <li>Check that iCloud sync is enabled within the app (Settings → iCloud toggle)</li>
-        <li>Make sure you have available iCloud storage</li>
+        <li>Check that you're signed into iCloud on your device (iOS Settings &rarr; Apple ID &rarr; iCloud)</li>
+        <li>Make sure iCloud sync is enabled within the app (Settings &rarr; iCloud toggle)</li>
+        <li>Verify you have available iCloud storage</li>
         <li>Try closing and reopening the app — sync can take a moment on first launch</li>
         <li>Ensure you're connected to the internet</li>
       </ul>
+      <p>If it's still not working, <a href="mailto:feedback@cookbookcuratorpro.com">email us</a> and we'll help troubleshoot.</p>
     </div>
 
-    <h2>Subscriptions & Free Scans</h2>
+    <!-- =============== PRIVACY & YOUR DATA =============== -->
+    <h2>Privacy & Your Data</h2>
 
     <div class="faq-item">
-      <h3>How many free scans do I get?</h3>
-      <p>Free users get <strong>5 AI scans per month</strong>, which reset on the 1st of each month. You can also earn up to 4 bonus scans by leaving a review on the App Store (+2) or sharing the app with a friend (+2). Manual recipe entry is always unlimited.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>What does a Pro subscription include?</h3>
-      <p>Pro gives you <strong>200 AI scans per month</strong>, full iCloud sync across all your Apple devices, and the ability to export and share your recipes. Pro is available as a monthly or annual subscription — the annual plan saves you 30%.</p>
+      <h3>Is my recipe data private and secure?</h3>
+      <p>Your recipes are stored locally on your device and in your private iCloud container — only you can access them. Photos sent for AI scanning are processed in real time and never stored on our servers. See our full <a href="privacy.html">Privacy Policy</a> for details.</p>
     </div>
 
     <div class="faq-item">
-      <h3>What happens when I run out of free scans?</h3>
-      <p>When your free scans are used up, you'll be prompted to upgrade to Pro. You can also add recipes manually at any time, or wait until the 1st of the next month when your free scans reset.</p>
+      <h3>How do I delete my account or recipe data?</h3>
+      <p>You can delete individual recipes or cookbooks by swiping left. To delete everything, go to <strong>Settings &rarr; Clear All Data</strong>. To delete your account entirely, <a href="mailto:feedback@cookbookcuratorpro.com">contact us</a> and we'll take care of it.</p>
     </div>
 
-    <h2>Account & Privacy</h2>
-
-    <div class="faq-item">
-      <h3>What data does the app collect?</h3>
-      <p>Your recipes are stored locally on your device and in your private iCloud container. Photos sent for AI scanning are processed in real time and not retained. See our full <a href="privacy.html">Privacy Policy</a> for details.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How do I delete my data?</h3>
-      <p>You can delete individual recipes or cookbooks by swiping left. To delete everything, go to <strong>Settings → Clear All Data</strong>. To delete your account entirely, contact us at the email below.</p>
-    </div>
-
+    <!-- =============== FOOTER =============== -->
     <div class="contact">
-      <p>Still need help? Contact us at <a href="mailto:feedback@cookbookcuratorpro.com">feedback@cookbookcuratorpro.com</a></p>
+      <h2>Still have questions?</h2>
+      <p>We read every email and typically respond within a few hours. Reach us at <a href="mailto:feedback@cookbookcuratorpro.com">feedback@cookbookcuratorpro.com</a>.</p>
+      <p class="footer-links">
+        <a href="index.html">Homepage</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="https://apps.apple.com/app/cookbook-curator-pro/id6741090498" target="_blank" rel="noopener">Download the App</a>
+      </p>
     </div>
   </div>
 </body>
