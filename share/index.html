@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookbook Shared with You — Cookbook Curator PRO</title>
+
+  <!-- Open Graph tags for link previews in WhatsApp, Messages, etc. -->
+  <meta property="og:title" content="A cookbook has been shared with you">
+  <meta property="og:description" content="Tap to import this cookbook into Cookbook Curator PRO">
+  <meta property="og:image" content="https://cookbookcuratorpro.com/assets/images/app-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cookbook Curator PRO">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A cookbook has been shared with you">
+  <meta name="twitter:description" content="Tap to import this cookbook into Cookbook Curator PRO">
+  <meta name="twitter:image" content="https://cookbookcuratorpro.com/assets/images/app-icon.png">
+
+  <link rel="icon" type="image/png" href="/assets/images/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --off-white: #FAF8F3;
+      --cream: #F5F1E8;
+      --light-brown: #C8B299;
+      --warm-gray: #8B8178;
+      --dark-brown: #5C4D3C;
+      --golden-tan: #D4A574;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--off-white);
+      color: var(--dark-brown);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      max-width: 400px;
+      margin: 40px 24px;
+      padding: 48px 32px;
+      background: white;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(92,77,60,0.08);
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      margin: 0 auto 24px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    p {
+      color: var(--warm-gray);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .open-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--dark-brown);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 16px;
+    }
+    .open-btn:hover { background: #4a3d2e; }
+    .store-link {
+      display: block;
+      font-size: 14px;
+      color: var(--light-brown);
+      text-decoration: none;
+    }
+    .store-link:hover { color: var(--dark-brown); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="/assets/images/app-icon.png" alt="Cookbook Curator PRO" class="icon">
+    <h1>Cookbook Shared with You</h1>
+    <p>Someone shared a cookbook from Cookbook Curator PRO. Open the link on your iPhone to import it into the app.</p>
+    <a id="openBtn" href="#" class="open-btn">Open in App</a>
+    <a href="https://apps.apple.com/app/cookbook-curator-pro/id6741090498" class="store-link">
+      Don't have the app? Get it on the App Store
+    </a>
+  </div>
+
+  <script>
+    // Extract the share ID from the URL path: /share/{recordID}
+    var path = window.location.pathname;
+    var parts = path.split('/').filter(Boolean);
+    var shareID = parts.length >= 2 ? parts[parts.length - 1] : '';
+
+    if (shareID && shareID !== 'index.html') {
+      // Build the custom URL scheme link for opening in-app
+      var appURL = 'cookbookcurator://share/' + shareID;
+      var btn = document.getElementById('openBtn');
+      btn.href = appURL;
+
+      // On iOS, try Universal Link first (page itself IS the Universal Link).
+      // If the app is installed, iOS will intercept and open the app directly.
+      // If not, this page is shown as fallback.
+    }
+  </script>
+</body>
+</html>
